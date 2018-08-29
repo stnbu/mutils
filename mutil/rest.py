@@ -24,7 +24,7 @@ import db
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-def rr(scheme, netloc, url, params='', query='', fragment='', auth=None):
+def rr(scheme, netloc, url, params='', query='', fragment='', headers={}, auth=None):
     """request+response -- given a location and query, just return the (json) data.
     Handle errors appropriately.
     """

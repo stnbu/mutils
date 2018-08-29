@@ -20,7 +20,15 @@ def get_symbol_class(table_name, schema):
         __tablename__=table_name,
         id=Column(Integer, primary_key=True))
 
-    for column, type_ in schema:
+    for row in schema:
+        if len(row) == 1 or not row[1]:
+            column = row[0]
+            type_ = String
+        elif isinstance(row, str):
+            column = row
+            type_ = String
+        else:
+            column, type_ = row
         attrs[column] = Column(type_)
 
     return type(table_name, (Base,), attrs)
