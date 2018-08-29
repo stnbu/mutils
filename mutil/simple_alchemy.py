@@ -2,14 +2,17 @@
 """Very simple, SQLAlchemy table and session makers.
 """
 
+import os
+import atexit
+
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-def get_symbol_class(table_name, schema):
+def get_table_class(table_name, schema):
     """`table_name` (str) is used for both the python class name and the `__tablename__`.
 
     `schema` is a sequence of (`name`, `type`) tuples, `name` being the column name `type`
@@ -34,7 +37,7 @@ def get_symbol_class(table_name, schema):
     return type(table_name, (Base,), attrs)
 
 
-def get_session(db_path, echo):
+def get_session(db_path, echo=False):
     """Create and return a SQLAlchemy `session` object
     """
 
@@ -43,4 +46,7 @@ def get_session(db_path, echo):
     Session = sessionmaker(bind=engine)
     session = Session()
     Base.metadata.create_all(engine)
+
+    atexit.register(session.close)
+
     return session
