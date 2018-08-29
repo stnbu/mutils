@@ -12,6 +12,7 @@ import daemon.pidfile
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
+
 def daemonize(main):
 
     if len(sys.argv) == 1:
@@ -34,7 +35,7 @@ def daemonize(main):
             logger.exception('uncaught exception: {}'.format(str(value)))
             sys.__excepthook__(type_, value, tb)
         sys.excepthook = exception_handler
-        
+
     logger.debug('starting daemon {} using path {}'.format(script_name, dir_path))
 
     if daemon:

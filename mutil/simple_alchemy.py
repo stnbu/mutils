@@ -12,6 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 def get_table_class(table_name, schema):
     """`table_name` (str) is used for both the python class name and the `__tablename__`.
 
