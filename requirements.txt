@@ -1,3 +1,4 @@
 python-daemon>=2.2
 SQLAlchemy>=1.2.11
 requests>=2.18
+python-dateutil>=2.7
