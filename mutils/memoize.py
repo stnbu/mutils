@@ -2,7 +2,7 @@
 
 import functools
 
-def memoized(f):
+def memoize(f):
     """Decorate a function (without arguments), caching its results and returning the cache when available.
     """
     proxy_name = '_' + f.__name__
